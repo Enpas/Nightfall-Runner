@@ -27,9 +27,10 @@ canvas {
   transform: translate(-50%); 
   display: none;
   margin-top: 2em;
-  padding: 15px;
+  padding: 20px;
   cursor: pointer;
   border: none;
+  border-radius: 100%;
   background-color: #070707fa;
 }
 
@@ -47,7 +48,7 @@ canvas {
   filter: invert(0);
 }
 
-@media (max-width: 450px) {
+@media (max-width: 992px) {
 
   #playAgain {
     margin-top: 1em;
@@ -55,7 +56,7 @@ canvas {
   }
 
   #playAgain img {
-    width: 1.5em;
+    width: 2.5em;
     filter: invert(1);
   }
 

@@ -1,20 +1,32 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- SEO -->
     <title>Nightfall Runner</title>
-    <link rel="icon" href="assets/images/favicon.svg">
+    <meta name="description" content="Nightfall Runner è un gioco 2D endless runner ambientato in un misterioso bosco autunnale. Guida un lupo agile e scattante per evitare ostacoli e raggiungere il punteggio più alto.">
+    <meta name="author" content="Ennio Pascucci">
+    <!-- Open Graph -->
+    <meta property="og:title" content="Nightfall Runner">
+    <meta property="og:description" content="Nightfall Runner è un gioco 2D endless runner ambientato in un misterioso bosco autunnale. Guida un lupo agile e scattante per evitare ostacoli e raggiungere il punteggio più alto.">
+    <meta property="og:image" content="assets/images/preview.jpg">
+    <meta property="og:url" content="https://nightfallrunner.netlify.app/">
+    <meta property="og:type" content="website">
+    <!-- Risorse -->
+    <link rel="icon" type="image/svg" href="assets/images/favicon.svg">
     <link rel="stylesheet" href="assets/css/main.css">
 </head>
 <body>
 
-  <canvas id="gameCanvas"></canvas>
+  <canvas id="gameCanvas" width="1280" height="720"></canvas>
+
   <button id="playAgain">
     <img src="assets/images/play-again.svg" alt="playAgain">
   </button>
     
   <script src="assets/js/main.js"></script>
+
 </body>
 </html>

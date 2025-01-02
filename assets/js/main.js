@@ -3,22 +3,18 @@ const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
 const baseWidth = 1280;
-const baseHeight = 720;
+const baseHeight = 720; 
 
-const scaleFactor = window.devicePixelRatio || 2;
-canvas.width = baseWidth * scaleFactor;
-canvas.height = baseHeight * scaleFactor;
-canvas.style.width = `${baseWidth}px`; 
-canvas.style.height = `${baseHeight}px`; 
-ctx.scale(scaleFactor, scaleFactor); 
+canvas.width = baseWidth;
+canvas.height = baseHeight;
 
 function resizeCanvas() {
     const windowWidth = window.innerWidth;
     const windowHeight = window.innerHeight;
 
     if (windowWidth >= baseWidth && windowHeight >= baseHeight) {
-        const offsetX = (windowWidth - baseWidth) / 2;
-        const offsetY = (windowHeight - baseHeight) / 2;
+        canvas.style.width = `${baseWidth}px`;
+        canvas.style.height = `${baseHeight}px`;
     } else {
         const scaleX = windowWidth / baseWidth;
         const scaleY = windowHeight / baseHeight;
@@ -30,8 +26,9 @@ function resizeCanvas() {
 }
 
 window.addEventListener("resize", resizeCanvas);
+window.addEventListener("orientationchange", resizeCanvas);
+
 resizeCanvas();
-window.addEventListener("orientationchange", resizeCanvas); 
 
 // Variabili di gioco
 const baseGravity = 0.5;
@@ -205,6 +202,7 @@ const pg = {
             const yPos = 20;
 
             const transitionSpeed = Math.min(1.0 + speed / 10, 2.0);
+            
             if (visibleHp > this.hp) {
                 visibleHp = Math.max(this.hp, visibleHp - transitionSpeed);
             } else if (visibleHp < this.hp) {
@@ -218,11 +216,12 @@ const pg = {
             else if (visibleHp > 30) barColor = "orange";
             else barColor = "red";
 
-            ctx.fillStyle = "gray";
-            ctx.fillRect(xPos, yPos, barWidth, barHeight);
-
             ctx.fillStyle = barColor;
             ctx.fillRect(xPos, yPos, currentWidth, barHeight);
+
+            ctx.strokeStyle = barColor;
+            ctx.lineWidth = 2;
+            ctx.strokeRect(xPos, yPos, barWidth, barHeight);
         }
     }
 };
@@ -469,13 +468,13 @@ function update() {
         obs.speed = speed;
             if (obs.type === 'flying') {
                 obs.frameSpeed = Math.max(1, flyingObstaclesFrameSpeed - Math.floor(speed / 3));
-            } else if (obs.color === 'blue') {
+            } else if (obs.type === 'ground') {
                 obs.frameSpeed = Math.max(1, runningObstaclesFrameSpeed - Math.floor(speed / 3));
             }
         });
     }
 
-    gravity = baseGravity + (speed / 50);
+    gravity = baseGravity + (speed / 35);
 
     for (let i = 0; i < obstacles.length; i++) {
         let obs = obstacles[i];
@@ -485,10 +484,18 @@ function update() {
         }
     }
 
-    ctx.fillStyle = "aqua";
-    ctx.font = "25px sans-serif";
+    ctx.shadowColor = "black";
+    ctx.shadowOffsetX = 2; 
+    ctx.shadowOffsetY = 2;
+    ctx.shadowBlur = 2;
+    ctx.fillStyle = "white";
+    ctx.font = "bold 25px sans-serif";
     ctx.fillText("Distanza Percorsa: " + Math.floor(distance) + "m", canvas.width - 1260, 80);
     ctx.fillText("Ostacoli Superati: " + passedObstacles, canvas.width - 1260, 120);
+    ctx.shadowColor = "transparent";
+    ctx.shadowOffsetX = 0;
+    ctx.shadowOffsetY = 0;
+    ctx.shadowBlur = 0;
 
     requestAnimationFrame(update);
 }
@@ -502,7 +509,7 @@ function gameOver() {
     pg.hp = 0; 
 
     ctx.fillStyle = "white";  
-    ctx.font = "40px sans-serif";
+    ctx.font = "bold 50px sans-serif";
 
     const text = "GAME OVER";
     const textWidth = ctx.measureText(text).width;
@@ -546,7 +553,7 @@ playAgain.addEventListener("click", restartGame);
 function showWelcomeMessage() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "white";
-    ctx.font = "40px sans-serif";
+    ctx.font = "bold 50px sans-serif";
     const welcomeText = "Clicca o Premi ''Freccia Su''-''Spazio'' per iniziare";
     const textWidth = ctx.measureText(welcomeText).width;
     ctx.fillText(welcomeText, (canvas.width - textWidth) / 2, canvas.height / 2);

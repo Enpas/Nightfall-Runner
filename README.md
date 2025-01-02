@@ -1,8 +1,8 @@
 # 🌕 Nightfall Runner
 
-![Anteprima del gioco](assets/images/nightfall-runner-screenshot.jpg)
+![Anteprima del gioco](assets/images/preview.jpg)
 
-Benvenuto in **Nightfall Runner**, un coinvolgente gioco 2d endless runner ambientato in un misterioso bosco autunnale sotto la luce della luna! Guida un lupo agile e scattante mentre evita pericolosi ostacoli e cerca di raggiungere il punteggio più alto.
+Benvenuto in **Nightfall Runner**, un coinvolgente gioco 2D endless runner ambientato in un misterioso bosco autunnale sotto la luce della luna! Guida un lupo agile e scattante mentre evita pericolosi ostacoli e cerca di raggiungere il punteggio più alto.
 
 [🎮 Gioca ora a Nightfall Runner!](https://nightfallrunner.netlify.app/)
 
